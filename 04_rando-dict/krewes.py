@@ -23,5 +23,9 @@ krewes = { # list of student names
          }
 
 x = krewes.get(int(random.randint(4,5))) # grabs a random value from the key:value pair.
+randomName = x[random.randint(0,len(x)-1)] # prints a name using a random index within the value list.
 
-print (x[random.randint(0,len(x)-1)]) # prints a name using a random index within the value list.
+# Test Cases
+print("Random Name from the Library:")
+print(randomName) # prints a random name
+
