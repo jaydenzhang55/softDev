@@ -9,7 +9,7 @@ time spent: 0.7 hours
 
 import random
 
-file = open('05_bitstream\krewes.txt','r')
+file = open('krewes.txt','r')
 
 readString = file.readline()
 listOfNames = readString.split('@@@') # (pd$$$devo$$$ducky, ...)
