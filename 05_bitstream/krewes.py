@@ -1,5 +1,5 @@
 ''' 
-Jayden Zhang
+Jayden Zhang, Endrit Idrizi 
 J.E.D
 SoftDev
 K05 -- Reading Files, Spliting Strings, Creating Dictionaries / Using open() to open a file, split() to split a string into an array, making a list of dictionaries using append().
