@@ -8,6 +8,8 @@ time spent: 1 hour
 '''
 
 '''
+Disco:
+- Import csv as a module.
 Q: 
 - What are more efficient ways to write a weighted average generator?
 - What other primitive file types are there?
@@ -21,6 +23,8 @@ C:
 C:
 - If you had a long dictionary, would this cause a hiccup in processing speed? 
 - Can we use an algorithm to make the program more efficient?
+HOW THIS SCRIPT WORKS:
+- Opens the csv file using csv.reader and excludes the first and last row. Creates a range of random numbers each with a chance equal to each occupation's percentage.
 '''
 
 import csv
@@ -34,7 +38,6 @@ with open('occupations.csv', newline='') as csvfile: # reads the csv file using 
     
 def randomSelection(): # function for choosing a random number with a weighted percentage
     x = random.uniform(0.0,99.8)
-    print(x)
     for key, value in dict.items():
         x = x - value # each key has a range and this subtracts until it is chosen
         if x <= 0:
