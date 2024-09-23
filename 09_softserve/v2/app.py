@@ -13,3 +13,5 @@ def hello_world():
 
 app.run()
 
+# it prints "__main__" in the terminal.
+

@@ -14,3 +14,5 @@ def hello_world():
 if __name__ == "__main__":      # true if this file NOT imported
     app.debug = True            # enable auto-reload upon code change
     app.run()
+
+# if the file is the main file, you will be able to write changes and have it show up live.

@@ -13,3 +13,7 @@ def hello_world():
 
 app.debug = True
 app.run()
+
+# Below is the output that presents itself when app.debug is set to True. This allows us to edit the code with live updates.
+# Debugger is active!
+# Debugger PIN: 102-245-584

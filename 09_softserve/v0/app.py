@@ -12,3 +12,4 @@ def hello_world():
 
 app.run()                      # ...
                 
+# Was similar to the teardown we did yesterday.
