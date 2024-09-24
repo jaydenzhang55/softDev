@@ -17,15 +17,19 @@ with open('occupations.csv', newline='') as csvfile: # reads the csv file using 
         if (row[0] != 'Job Class') and (row[0] != 'Total'): # removes the first and last keys
             dict.update({row[0]:float(row[1])}) # updates the dictionary with the occupations as keys and the percentage as values.
     
+finalText = "PPAP - Margie Cao, Ziyad Hamed, Jayden Zhang"
+
 app = Flask(__name__) ## initalizes the flask application
 @app.route("/") # routes using the '/' directory
     
 def randomSelection(): # function for choosing a random number with a weighted percentage
+    for key in dict.keys():
+        finalText = finalText + key
     x = random.uniform(0.0,99.8)
     for key, value in dict.items():
         x = x - value # each key has a range and this subtracts until it is chosen
         if x <= 0:
-            return key
-            break
+            return finalText + key
+            break   
 
 app.run()
