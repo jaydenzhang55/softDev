@@ -21,13 +21,13 @@ app = Flask(__name__) # initalizes the flask application
 @app.route("/") # routes using the '/' directory
     
 def randomSelection(): # function for choosing a random number with a weighted percentage
-    finalText = "PPAP - Margie Cao, Ziyad Hamed, Jayden Zhang<br>Occupations:<br>" # creates the starting string
+    finalText = "<h1 style='display: flex; align-items: center; justify-content: center'>PPAP - Margie Cao, Ziyad Hamed, Jayden Zhang</h1><br>Occupations:<br>" # creates the starting string
     for key in dict.keys(): # appends each key in the list of keys into the finalText string to return as one big string
         finalText = finalText + key + "<br>" # uses the <br> command which is commonly seen in html which is similar to \n
     x = random.uniform(0.0,99.8)
     for key, value in dict.items():
         x = x - value # each key has a range and this subtracts until it is chosen
         if x <= 0:
-            return finalText + "Selected Occupation: " + key # adds the randaomly selected occupation html
+            return finalText + "Selected Occupation: " + "<p style='display: flex; align-items: center; justify-content: center; color: purple; font-size: 40px'>" + key + "</p>" # adds the randaomly selected occupation html
 
 app.run()
