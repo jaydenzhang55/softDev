@@ -1,36 +1,11 @@
 ## K11: Some Things Never Change
 ### Due: 2024-09-26r before class
 
-Your Trio Mission:
+The first app.route('/') will lead us to a page displaying "No hablo queso!".
 
-1. In a new directory in your workshop, save a copy of the demo for using flask to serve static files.
-1. As a team...
-  - Familiarize yourself with the app directory structure and the files' content.
-  - Note anything notable.
-  - Predict expected behaviors.
-  - Spin up your website on localhost and reconcile behavior with prediction.
-  - Record your notes in `readme` in app's root directory.
-1. Once your team has done this, compose and store another html file named `fixie.html` (containing some html to render your team name and roster) so that flask can serve it staticly.
+We predict that accessing http://localhost:5000/static/foo.html will lead us to a route that accesses the localhost displaying the html file. We believe that this will only work when we uncomment the 
+app.route('/') and use the other app.route. 
 
-<br>
+In reality, the file is found but it does not produce the same terminal results as if the app.route were to be commented (so the method doesn't run). 
 
-DELIVERABLES:
-* Save to workshop as indicated.
-* Each teammate should submit matching sourcecode.
-
-```
-path/to/myworkshop$ tree 11_flask-static
-.
-├── app.py
-├── readme
-└── static
-    ├── foo
-    ├── foo.html
-    └── fixie.html
-```
-
-<br>
-
-[related](https://ukulelemagazine.com/lessons/uke-lesson-3-chords-and-the-truth-country-songwriting-legend-harlan-howard)  
-[related](https://en.wikipedia.org/wiki/Plain_text)  
-
+When trying to run http://localhost:5000/static/foo, we thought that it would default to an html file. In actuality, it downloads the foo file when you run the localhost link.
