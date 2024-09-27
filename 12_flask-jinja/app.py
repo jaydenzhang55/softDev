@@ -6,14 +6,20 @@
 """
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Q0:
-Nothing because it would assume html
+Removing render_template wouldn't affect the @app.route('/'),
+but would rather affect the function that uses render_template. It would
+most likely result in an error because you're not able to return a method
+that isn't imported or previously defined.
 
 Q1:
-Yes, http://localhost:5000/my_foist_template
+Yes, the url would be http://localhost:5000/my_foist_template or
+https://127.0.0.1:5000/my_foist_template as it redirects the page to
+that app.route function.
 
 Q2:
-model_template.html is the template file to which collection and foo are
-paramaters for the value a nd the title respectively
+model_template.html is the template file that contains the HTML
+to which collection and foo are used as the values of the objects
+(otherwise in {}) within the html file.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
 
