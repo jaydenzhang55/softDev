@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- 
+  Margie Cao, Jayden Zhang, Nafiyu Murtaza
+  GOOGle
+  SoftDev
+  K13 -- Combine -- Creating a table of occupations with links to each one and using render_template to display templates on certain routes. Also, using everything we've learned before to create the page. 
+  2024-09-30
+  Time Spent: 3hrs
+ -->
+
+<html>
+  <head>
+    <title> {{ title }} </title> <!-- Title of Page -->
+  </head>
+
+  <body>
+    <h1> {{ title }} </h1> <!-- Title On Page -->
+    <h2> {{ descriptiveHeading }} </h2> <!-- Description -->
+    <h3> {{ chosenOccupation }} </h3> <!-- Chosen Occupation Generator -->
+    <p> {{ ourTNPG }} </p> <!-- TNPG -->
+    <table>
+      <tr style='border: 1px solid black'> <!-- First Row -->
+        <td style='border: 1px solid black'> {{ keys[0] }} </td>
+        <td style='border: 1px solid black'> {{ topAndBottom.get("Job Class")[0] }} </td>
+      </tr>
+    {% for key, value in newCollection %} <!-- Middle Rows -->
+      <tr style='border: 1px solid black'>
+        <td style='border: 1px solid black'> <a href="{{ value[1] }}"> {{ key }} </a> </td>
+        <td style='border: 1px solid black'> {{ value[0] }} </td>
+      </tr>
+    {% endfor %}
+    <tr style='border: 1px solid black'> <!-- End Row -->
+      <td style='border: 1px solid black'> {{ keys[-1] }} </td>
+      <td style='border: 1px solid black'> {{ topAndBottom.get("Total")[0] }} </td>
+    </tr>
+    </table>
+   </body>
+
+</html>

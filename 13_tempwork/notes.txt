@@ -1,0 +1,26 @@
+Margie Cao, Jayden Zhang, Nafiyu Murtaza <br>
+GOOGle <br>
+SoftDev <br>
+K13 -- Combine -- Creating a table of occupations with links to each one and using render_template to display templates on certain routes. Also, using everything we've learned before to create the page. <br>
+2024-09-30 <br>
+Time Spent: 3hrs <br>
+<br>
+Notes: <br>
+<br>
+- To return a template, it has to be in the template folder.<br>
+- You can return txt files through render_template.<br>
+- You're able to use objects in HTML as well as common operations like indexing.<br>
+- To create a dictionary with multiple values, you can use a list and then use the index of the value you would like.<br>
+- If you have two template.html's it would break your code / look weird on the page.<br>
+- You can use the "table" tag with "tr" tag and "td" tag to create a table of values in HTML.<br>
+    - Don't use the "br" tag with tables as it automatically does that for you everytime you make a row.<br>
+- You can assign methods to the values through the render_template method.<br>
+- "title" tag in HTML renames the tab to the value incase in the title tag.<br>
+- The "a" tag is used for hyperlinks. <br>
+- You can import in one line to save space. <br>
+- You can use open('file', mode='r') to display / return text files. <br>
+- Keys and Values can get retrieved using .keys()[index] and .get('name of key') respectively.<br>
+<br>
+EG0:<br>
+- css styling for the table :D -> <b>style='border: 1px solid black'<b><br>
+
