@@ -1,4 +1,4 @@
-# Clyde 'Thluffy' Sinclair
+# Jayden Zhang and Endrit Idrizi (JED)
 # SoftDev
 # Sep 2024
 
