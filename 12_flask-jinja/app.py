@@ -3,13 +3,21 @@
 # SoftDev
 # Sep 2024
 
+'''
+Notes:
+- You're able to import template files and use them in methods to
+fill in any variables within the template file.
+- You can't use thonny to edit HTML files (or open one at least).
+- Endfor in HTML is used to end for loops in HTML code.
+'''
+
 """
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Q0:
 Removing render_template wouldn't affect the @app.route('/'),
 but would rather affect the function that uses render_template. It would
 most likely result in an error because you're not able to return a method
-that isn't imported or previously defined.
+that isn't imported or previously defined. 
 
 Q1:
 Yes, the url would be http://localhost:5000/my_foist_template or
@@ -19,7 +27,7 @@ that app.route function.
 Q2:
 model_template.html is the template file that contains the HTML
 to which collection and foo are used as the values of the objects
-(otherwise in {}) within the html file.
+(otherwise in {{}}) within the html file.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
 
@@ -29,7 +37,7 @@ to which collection and foo are used as the values of the objects
 # Q0: What will happen if you remove render_template from the following statement?
 # (log prediction before executing...)   
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-from flask import Flask, render_template
+from flask import Flask
 app = Flask(__name__)
 
 @app.route("/")
