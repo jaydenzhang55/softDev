@@ -18,16 +18,28 @@ time spent: 1 hrs
       HEY YOU. YEAH YOU!! 
     </h1>
     <h3>
-      Enter your username in either submit box below to proceed.
+      Sign Up: Enter your username and password in either submit box below to proceed.
     </h3>
-    <form action="/auth" method="GET">
+    <form action="/signUp" method="GET">
       <input type="text" name="username">
       <input type="submit" name="sub1" value="GET">
     </form>
+    <form action="/signUp" method="GET">
+      <input type="text" name="password">
+      <input type="submit" name="sub2" value="GET">
+    </form>
     <br>
-    <form action="/auth" method="POST">
+
+    <h3>
+      Login: Enter your username and password in either submit box below to proceed.
+    </h3>
+    <form action="/logIn" method="GET">
       <input type="text" name="username">
-      <input type="submit" name="sub1" value="POST">
+      <input type="submit" name="sub3" value="GET">
+    </form>
+    <form action="/logIn" method="GET">
+      <input type="text" name="password">
+      <input type="submit" name="sub4" value="GET">
     </form>
   </body>
 
