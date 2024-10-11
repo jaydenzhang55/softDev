@@ -14,6 +14,7 @@ time spent: 1 hrs
 from flask import Flask             #facilitate flask webserving
 from flask import render_template   #facilitate jinja templating
 from flask import request           #facilitate form submission
+from flask import session
 import os
 
 #the conventional way:
@@ -29,25 +30,32 @@ def disp_loginpage():
 @app.route("/signUp", methods=['GET'])
 def signUp():
     gvp = "The difference between the GET and POST methods lies in the way data is retrieved. GET checks the dictionary (args) for a key that matches the input, while POST essentially pushes your data to the servers POST dictionary (form). Both are sent as QueryStrings REQUESTS."
-    username = request.args["username"] # GET uses request.form.
+    session['username'] = request.cookies.get('username')
+    session['password'] = request.cookies.get('password')
 
-    app.secret_key = osrandom(32)
+    print(request.cookies.get('username'))
+    print(request.cookies.get('password'))
+
+    return render_template("response.html", username=session['username'], gvp=gvp)
 
 @app.route("/logIn", methods=['GET'])
 def logIn():
     gvp = "The difference between the GET and POST methods lies in the way data is retrieved. GET checks the dictionary (args) for a key that matches the input, while POST essentially pushes your data to the servers POST dictionary (form). Both are sent as QueryStrings REQUESTS."
     username = request.args["username"] # GET uses request.form.
+    app.secret_key = os.urandom(32)
 
-    app.secret_key = osrandom(32)
+    return render_template("response.html", username="dsajhsdlkj", gvp=gvp)
 
 @app.route("/logOut", methods=['GET'])
 def logOut():
     username = request.args["username"] # GET uses request.form.
+    app.secret_key = os.random(32)
 
-    app.secret_key = osrandom(32)
+    return render_template("logout.html")
 
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
+    app.secret_key = os.urandom(32)
     app.debug = True 
     app.run()
