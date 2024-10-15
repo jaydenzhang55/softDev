@@ -1,9 +1,9 @@
 '''
 JED - Jayden Zhang, Endrit Idrizi
 SoftDev
-K16 - Flask-Form - Learning and Experimenting with Flask GET and POST Methods.
-2024-10-9
-time spent: 1 hrs
+K16 - Flask-Sessions - Creating a Flask Session to store usernames to automatically log-in without having to type the credentials.
+2024-10-15
+time spent: 2 hrs
 '''
 
 # import conventions:
@@ -24,33 +24,21 @@ app = Flask(__name__)    #create Flask object
 
 @app.route("/", methods=['GET', 'POST'])
 def disp_loginpage():
-    return render_template('login.html')
+    if 'username' in session: # if the username is still present in the session (hasn't logged out)
+        return render_template("response.html", username=session['username']) # logIn without entering credentials
+    return render_template('login.html') # else, signUp again.
 
 
 @app.route("/signUp", methods=['GET'])
 def signUp():
-    gvp = "The difference between the GET and POST methods lies in the way data is retrieved. GET checks the dictionary (args) for a key that matches the input, while POST essentially pushes your data to the servers POST dictionary (form). Both are sent as QueryStrings REQUESTS."
-    session['username'] = request.cookies.get('username')
-    session['password'] = request.cookies.get('password')
+    username = request.args.get("username") # get the inputed username
+    session['username'] = username # store it in session
 
-    print(request.cookies.get('username'))
-    print(request.cookies.get('password'))
+    return render_template("response.html", username=session['username'])
 
-    return render_template("response.html", username=session['username'], gvp=gvp)
-
-@app.route("/logIn", methods=['GET'])
-def logIn():
-    gvp = "The difference between the GET and POST methods lies in the way data is retrieved. GET checks the dictionary (args) for a key that matches the input, while POST essentially pushes your data to the servers POST dictionary (form). Both are sent as QueryStrings REQUESTS."
-    username = request.args["username"] # GET uses request.form.
-    app.secret_key = os.urandom(32)
-
-    return render_template("response.html", username="dsajhsdlkj", gvp=gvp)
-
-@app.route("/logOut", methods=['GET'])
+@app.route("/logOut", methods=['GET']) 
 def logOut():
-    username = request.args["username"] # GET uses request.form.
-    app.secret_key = os.random(32)
-
+    session.clear() # clears the session when you logOut
     return render_template("logout.html")
 
 

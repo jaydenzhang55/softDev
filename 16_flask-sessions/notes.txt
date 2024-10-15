@@ -1,15 +1,14 @@
-JTC - Jayden Zhang, Caden Khuu, Tim Ng
+JED - Jayden Zhang, Endrit Idrizi
 SoftDev
-K15 - Flask-Form - Learning and Experimenting with Flask GET and POST Methods.
-2024-10-9
-time spent: 1 hrs
+K16 - Flask-Sessions - Creating a Flask Session to store usernames to automatically log-in without having to type the credentials.
+2024-10-15
+time spent: 2 hrs
 
-- Request.args vs. Request.form are used to send and recieve data from GET and POST 
-methods. 
-- GET and POST are both insecure as they can be seen either in the URL or in the background. 
-How can we fix this?
-- You can have seperate methods for each GET and PUSH.
-- Both args and form are seperate dictionaries.
-- GET is default in HTML, but you can specify POST using method="POST"
-- We can retrieve the values from these immutable dictionaries for login purposes.
+- Flasks sessions are dictionaries that can help store information even when the page is reloaded / changed URL.
+    - You can store inputted data into flask sessions.
+    - For Example: if the username is already in the session, then they should still be logged in.
+- Flask sessions need a secret key.
+- You can clear a session using session.clear()
+- When signing up and then removing the hyperlink, it still brings you to the response page.
+
 
