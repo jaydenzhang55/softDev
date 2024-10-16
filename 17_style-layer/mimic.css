@@ -1,0 +1,63 @@
+/*
+Team: JED
+Roster: Jayden, Endrit
+K17 - CSS styling - Learning the Basics of CSS Code
+2024-10-15
+Time spent - 1.0 hours
+ */
+body {
+    background-color: grey;
+    border: 10px solid;
+    border-color: dimgrey;
+}
+
+h1 {
+    background-color: lightgrey;
+    color: white;
+    text-align: center;
+}
+
+h2 {
+    margin: 0;
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+}
+
+p {
+    display: flex;
+}
+
+.columns {
+    align-items: flex-end;
+}
+
+#navbar {
+    list-style-type: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+    height: 200px;
+}
+
+.navLI {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navLI a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.navLI a:hover {
+    text-decoration: none;
+    color: black;
+}
