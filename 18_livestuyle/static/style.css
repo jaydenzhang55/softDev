@@ -1,0 +1,70 @@
+/*
+JED - Jayden Zhang, Endrit Idrizi
+SoftDev
+K18 - LiveStuyle - Adding Flask and HMTL + CSS together to create a live page of our creation!!! 
+2024-10-16
+time spent: 1 hrs
+ */
+body {
+    background-color: grey;
+    border: 30px solid;
+    border-color: dimgrey;
+    }
+
+h1 {
+    background-color: lightgrey;
+    color: white;
+    text-align: center;
+    }
+
+h2 {
+    margin: 0;
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+    }
+
+p {
+    display: flex;
+    }
+
+footer{
+    float: right;
+    background-color: dimgrey;
+    color: white;
+    padding-top: 5px
+    }
+
+.columns {
+    align-items: flex-end;
+    }
+
+#navbar {
+    list-style-type: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+    height: 200px;
+    }
+
+.navLI {
+    display: inline;
+    margin-right: 20px;
+    }
+
+.navLI a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    }
+
+.navLI a:hover {
+    text-decoration: none;
+    color: black;
+    }
