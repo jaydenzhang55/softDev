@@ -15,6 +15,7 @@ h1 {
     background-color: lightgrey;
     color: white;
     text-align: center;
+    margin-top: 0px;
     }
 
 h2 {
@@ -28,6 +29,7 @@ h2 {
 
 p {
     display: flex;
+    margin-right: 5px;
     }
 
 footer{
