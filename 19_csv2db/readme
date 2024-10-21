@@ -1,0 +1,45 @@
+JED - Jayden Zhang, Endrit Idrizi
+SoftDev
+K19 - csv2db - Creating a SQL Database Using CSV Values
+2024-10-21
+time spent: 1 hrs
+
+DISCOVERIES:
+----------------------------------------------------
+* sqlite3 "name of file w/ SQL database" to open
+* you can use SQL statements (; or /), dot-commands (.), or
+CLI comments (#)
+* can output data using .mode (+ the format you want)
+* DictReader() is a Python module used to read from
+csv files.
+* I/O means input and output.
+* sqlite3.create(file param) creates a database file if not 
+present.
+* "SQLite is an embedded, server-less relational database 
+management system."
+* db.execute is used to add data into the SQL db.
+* PRIMARY KEY is used in SQL to determine the ID
+identifier in your csv file.
+- If no ID is present, the SQL db will automatically 
+assign one.
+* The type of variable comes after the actual 
+variable name in SQL.
+* The python "next" function is used to return the next item 
+from the iterator.
+* CREATE and INSERT are two functions that you can
+use in the SQL db.
+====================================================
+
+
+QUESTIONS/COMMENTS/CONCERNS:
+----------------------------------------------------
+Q: I had problems with trying to insert the same ID
+into the table. Is there any better way to preserve
+each ID without having it autogenerate?
+Q: How can I read SQL errors? Is there any way to 
+understand them more effectively?
+Q: Do I need the top row of each table inside my
+SQL data table?
+C: You can only view SQL errors through using
+python3 on the specific file. 
+====================================================
