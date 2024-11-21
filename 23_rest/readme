@@ -1,12 +1,22 @@
 NJ - Jayden Z., Naf M.
 SoftDev
-K23 -- Reviewing other CSS templates
-2024-11-19
-time spent: 2
+K23 -- Learning About and Using Rest APIs (Specifically NASA's API)
+2024-11-21
+time spent: 0.5
 
 DISCO: 
--
+- I would constantly get an SSL error, but I found a work around using the following:
+<code>
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+</code>
+- urllib.request returns the file type of the URL.
+- json.loads [json.load procures an error] is used to translate a json file into a python dictionary
 
 QCC:
-- hdurl vs url?
-- service version?
+- What is the difference between hdurl vs url?
+- What does service version mean?
+- What is an SSL Error? And how do you fix it without having to use an import?
+- Is there any library that combines the two imports we used today?
+- What other APIs are available and have functionality? How are they properly used in Software Development (besides in websites)?
+
