@@ -1,0 +1,14 @@
+Team Margie - Margie Cao, Jayden Zhang
+SoftDev pd0
+K27 - Basic functions in JavaScript
+2025-01-06m
+
+DISCO: 
+- you can define functions as variables, calling them with any necessary parameters to get the value.
+    - this is similar to the lambda function in DrRacket.
+- relearned how to code in prefix notion.
+- can use web console for JavaScript code.
+
+QCC: 
+- Difference between TypeScript and JavaScript?
+- Code Editor for JavaScript?
