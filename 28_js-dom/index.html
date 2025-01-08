@@ -1,44 +1,53 @@
 <!DOCTYPE html>
 
 <!--
-    Team Phantom Tollbooth :: Clyde Sinclair, Fierce Dragon
-    SoftDev pd0
-    K28 -- Manipulating the DOM
+    Team JD :: Jayden Zhang, Danny Huang
+    SoftDev pd5
+    K28 -- Getting more comfortable with the dev console and the DOM
     2025-01-07t
-  --------------------------------------------------
+     --------------------------------------------------
   -->
 
 <html lang="en">
-  <!-- HTML file for exploring JavaScript interactions with the DOM -->
+<!-- HTML file for exploring JavaScript interactions with the DOM -->
 
-  <head>
-    <meta charset="utf-8">
-    <style>
-      .red   {color : #ff0000;}
-      .green {color : #00ff00;}
-      .blue  {color : #0000ff;}
-    </style>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <style>
+    .red {
+      color: #ff0000;
+    }
 
-  <body>
-    <h1 id="h" class="blue">Hello World!</h1>
+    .green {
+      color: #00ff00;
+    }
 
-    <div id="div1" class="green">This is a div</div>
-    <div id="div2">This is a second div</div>
-    <div class="blue">This is a toid div</div>
+    .blue {
+      color: #0000ff;
+    }
+  </style>
+</head>
 
-    <ol id="thelist">
-      <li class="">item 0</li>
-      <li class="green blue">item 1</li>
-      <li class="green blue">item 2</li>
-      <li class="red green blue">item 3</li>
-      <li class="red green blue">item 4</li>
-      <li class="green blue">item 5</li>
-      <li class="green blue">item 6</li>
-      <li class="">item 7</li>
-    </ol>
+<body>
+  <h1 id="h" class="blue">Hello World!</h1>
 
-    <script src="dommy_consolery.js"></script>
+  <div id="div1" class="green">This is a div</div> 
+  <div id="div2">This is a second div</div>
+  <div class="blue">This is a toid div</div>
 
-  </body>
+  <ol id="thelist">
+    <li class="">item 0</li> <!-- deleting the class names fixes the issue experienced in the js file. -->
+    <li class="green blue">item 1</li> 
+    <li class="green blue">item 2</li>
+    <li class="red green blue">item 3</li>
+    <li class="red green blue">item 4</li>
+    <li class="green blue">item 5</li>
+    <li class="green blue">item 6</li>
+    <li class="">item 7</li>
+  </ol>
+
+  <script src="dommy_consolery.js"></script>
+
+</body>
+
 </html>
