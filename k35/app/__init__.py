@@ -57,8 +57,7 @@ def init_db():
         conn.commit()
     print("Database initialized successfully!")
 
-@app.before_first_request
-def initialize():
+with app.app_context():
     """Initialize the database before the first request"""
     init_db()
 
