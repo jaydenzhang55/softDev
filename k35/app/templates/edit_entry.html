@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Entry{% endblock %}
+
+{% block content %}
+    <h2>Edit Your Blog</h2>
+    <form action="{{ url_for('edit_entry', blog_id=blog.id) }}" method="POST">
+        <label>Title:</label>
+        <input type="text" name="title" value="{{ blog.title }}" required>
+
+        <label>Content:</label>
+        <textarea name="content" required>{{ blog.content }}</textarea>
+
+        <button type="submit">Update</button>
+    </form>
+{% endblock %}

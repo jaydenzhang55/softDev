@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Blog Site{% endblock %}
+
+{% block content %}
+    <h1>Welcome to the Blog Hosting Site</h1>
+    <p>Read and share blogs with the community!</p>
+
+    <h2>Recent Blogs</h2>
+    <ul>
+        {% for blog in blogs %}
+            <li><a href="{{ url_for('view_blog', blog_id=blog.id) }}">{{ blog.title }}</a> by {{ blog.author }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

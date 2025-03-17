@@ -1,0 +1,29 @@
+Team JZ :: Jayden Zhang, Jackie Zeng
+SoftDev pd5
+K35 -- Introduction into AI
+2025-03-17m
+Time Spent: 2.5
+
+DISCO:
+- Generation varies in length depending on prompt.
+- Different prompts sometimes give different responses.
+- Generation occurs very FAST.
+- Use of high-level techniques that don't have any previous introduction.
+	- We didn't know what some of the flask '@' did, but they were cool!
+- Different AI models for differnet purposes.
+- Sometimes gets things wrong or forgets to add lines of code.
+- Comments are very helpful for understanding what each line is doing.
+
+Q/C/C:
+some areas of interest...
+q0: How many tries did it take to "get it right?"
+
+It took >4 tries to "get it right" in accordance with what we wanted. This was mainly because we had to manually adjust certain aspects and fix some of the errors that the bot had missed. 
+
+q1: Did you catch any errors? If so, how did you notice, and what did you do?
+
+When we ran the app, there were multiple errors involving database creation and positioning. We asked the AI another prompt to "fix" these errors. With enough times, we were able to dissect and fix the errors. 
+
+q2: How similar or different is the bot's output to that of your past self / old team?
+
+The bot's output to that of our old team was extremely different, expect for the tree structure as we specified that in our dialogues. The methods and techniques that the bot used were far more advanced and specific for our purpose, which can show a potential in using chatbots to help us learn different and new parts of Flask and other programs. The CSS was definately worse than our old team's even with our basic understanding, as the bot focused more on functionality then looks.

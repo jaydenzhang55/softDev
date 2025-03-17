@@ -1,0 +1,485 @@
+Scenario Two: Your team has been contracted to create a web log hosting site, with the following features:
+
+    Users will have to register to use the site.
+    A logged-in user will be able to
+        Create a new blog
+        Update their blog by adding a new entry
+        View and edit their own past entries
+        View the blogs of other users
+
+Flask will serve as your web server/delivery framework.
+SQLite3 will serve as your backend data storage system.
+
+    As you grown your "sql-fu", always start with Devo Knowledge Base (QAF, n&c) and primary documentation. (...and if none of these have the answer you seek, and you find a SO post that is actually useful, or any other diamond in the rough of the Intertrash, add it to Devo KB)
+    Get creative, think boldly, get your hands dirty as you experiment via the sqlite3 shell and see what works/sticks...
+
+Multiple Python files should be used, as necessary, for application layer. (a.k.a. "middleware" modules, etc.)
+CSS
+
+repo structure:
+app/
+    __init__.py
+    static/
+        css/          ( O P T I O N A L )
+    templates/
+design.pdf
+devlog.txt
+flag.jpg
+README.md
+requirements.txt
+
+create this project
+-----------------------------------------------------------------------------------
+```python name=app/__init__.py
+from flask import Flask
+
+def create_app():
+    app = Flask(__name__)
+    app.config['SECRET_KEY'] = 'your-secret-key'
+
+    from app.routes import main_bp
+    app.register_blueprint(main_bp)
+
+    return app
+```
+
+```python name=app/db.py
+import sqlite3
+
+def get_db_connection():
+    conn = sqlite3.connect('database.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def init_db():
+    conn = get_db_connection()
+    with open('schema.sql', 'r') as f:
+        conn.executescript(f.read())
+    conn.close()
+```
+
+```python name=app/models.py
+from app.db import get_db_connection
+
+def create_user(username, password):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("INSERT INTO users (username,password) VALUES (?,?)", (username, password))
+    conn.commit()
+    conn.close()
+
+def get_user_by_username(username):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users WHERE username = ?", (username,))
+    user = cur.fetchone()
+    conn.close()
+    return user
+```
+
+```python name=app/routes.py
+from flask import Blueprint, render_template, request, redirect, url_for
+from app.models import create_user, get_user_by_username
+
+main_bp = Blueprint('main', __name__)
+
+@main_bp.route('/')
+def index():
+    return render_template('index.html')
+
+@main_bp.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        create_user(username, password)
+        return redirect(url_for('main.index'))
+    return render_template('register.html')
+```
+
+```css name=app/static/css/style.css
+/* Optional CSS file */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+```
+
+```html name=app/templates/index.html
+{% extends 'base.html' %}
+{% block content %}
+<h2>Welcome to the Blog Hosting Site!</h2>
+<p>Please <a href="{{ url_for('main.register') }}">Register</a> or log in to start blogging.</p>
+{% endblock %}
+```
+
+```html name=app/templates/register.html
+{% extends 'base.html' %}
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+    <label for="username">Username:</label>
+    <input id="username" name="username" type="text" required>
+    <br><br>
+    <label for="password">Password:</label>
+    <input id="password" name="password" type="password" required>
+    <br><br>
+    <button type="submit">Register</button>
+</form>
+{% endblock %}
+```
+
+```html name=app/templates/base.html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Blog Hosting Site</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <header>
+      <h1>My Blog Site</h1>
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>
+```
+
+````markdown name=README.md
+# Blog Hosting Site (Flask + SQLite3)
+
+This is a sample Flask application that allows users to:
+- Register an account
+- Create and manage their own blog entries
+- View other users' blogs
+
+## Features
+- SQLite3 database
+- Flask framework for routing
+- Simple HTML templates for UI
+
+## Setup
+1. Clone or download the repository.
+2. Create a virtual environment and install dependencies:  
+   ```
+   pip install -r requirements.txt
+   ```
+3. Initialize the database by running:
+   ```
+   python -c "from app.db import init_db; init_db()"
+   ```
+4. Start the application:
+   ```
+   flask run
+   ```
+5. Open your browser at http://127.0.0.1:5000/
+
+````
+```txt name=devlog.txt
+Development Log:
+- Day 1: Set up initial Flask structure, DB, and routes.
+- Day 2: Created template files and CSS styling.
+- Day 3: Finalized registration functionality and tested database integration.
+```
+
+```txt name=design.pdf
+(Placeholder for design document)
+```
+
+```txt name=flag.jpg
+(Placeholder for image)
+```
+
+```txt name=requirements.txt
+Flask==2.3.2
+```
+
+```sql name=schema.sql
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
+);
+
+-- Additional tables for blogs/entries can be added here
+```
+
+Feel free to customize further by adding additional routes, database tables, and templates as needed.
+-----------------------------------------------------------------------------------
+from flask import Flask, render_template, request, redirect, url_for, session, g
+import sqlite3
+
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+
+DATABASE = 'blog.db'
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+        db.row_factory = sqlite3.Row
+    return db
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        db.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, password))
+        db.commit()
+        return redirect(url_for('login'))
+    return render_template('register.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        user = db.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password)).fetchone()
+        if user:
+            session['user_id'] = user['id']
+            return redirect(url_for('dashboard'))
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect(url_for('home'))
+
+@app.route('/dashboard')
+def dashboard():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    db = get_db()
+    blogs = db.execute('SELECT * FROM blogs WHERE user_id = ?', (session['user_id'],)).fetchall()
+    return render_template('dashboard.html', blogs=blogs)
+
+@app.route('/new_blog', methods=['GET', 'POST'])
+def new_blog():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        title = request.form['title']
+        db = get_db()
+        db.execute('INSERT INTO blogs (user_id, title) VALUES (?, ?)', (session['user_id'], title))
+        db.commit()
+        return redirect(url_for('dashboard'))
+    return render_template('new_blog.html')
+
+@app.route('/blog/<int:blog_id>', methods=['GET', 'POST'])
+def blog(blog_id):
+    db = get_db()
+    blog = db.execute('SELECT * FROM blogs WHERE id = ?', (blog_id,)).fetchone()
+    if request.method == 'POST':
+        content = request.form['content']
+        db.execute('INSERT INTO entries (blog_id, content) VALUES (?, ?)', (blog_id, content))
+        db.commit()
+    entries = db.execute('SELECT * FROM entries WHERE blog_id = ?', (blog_id,)).fetchall()
+    return render_template('blog.html', blog=blog, entries=entries)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+can you create the databse table; Im getting operational errors: table not found
+-------------------------------------------------------------------------------------------
+Yes! You need to create the database tables before running the Flask app. Below is a **SQLite script** to set up the necessary tables.  
+
+---
+
+### **Steps to Fix the Error**
+1. **Create a new Python script** (e.g., `init_db.py`).
+2. **Run this script once** to initialize the database.
+3. **Start your Flask app** after running the script.
+
+---
+
+### **Database Initialization Script (`init_db.py`)**
+```python
+import sqlite3
+
+DATABASE = 'blog.db'
+
+def create_tables():
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    
+    # Create Users Table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL
+        )
+    ''')
+
+    # Create Blogs Table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS blogs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            title TEXT NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+    ''')
+
+    # Create Entries Table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS entries (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            blog_id INTEGER NOT NULL,
+            content TEXT NOT NULL,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (blog_id) REFERENCES blogs(id) ON DELETE CASCADE
+        )
+    ''')
+
+    conn.commit()
+    conn.close()
+    print("Database initialized successfully!")
+
+if __name__ == '__main__':
+    create_tables()
+```
+
+---
+
+### **How to Run the Script**
+1. Save this script as `init_db.py` in the same directory as your Flask app.
+2. Open a terminal (or command prompt) and navigate to your project folder.
+3. Run the following command:
+   ```
+   python init_db.py
+   ```
+4. This will create the `blog.db` file with the required tables.
+5. Now, start your Flask app:
+   ```
+   python app.py
+   ```
+
+---
+
+### **Why This Works**
+- The script **creates three tables**: `users`, `blogs`, and `entries`.
+- It ensures that **users can create multiple blogs**, and **blogs can have multiple entries**.
+- `ON DELETE CASCADE` ensures that if a user or blog is deleted, related data is also removed.
+
+Let me know if you have any issues! 🚀
+-------------------------------------------------------------------------------------------
+i want it to be in init.py, put it into this file
+-------------------------------------------------------------------------------------------
+You can modify your `init.py` file to **initialize the database when the app starts** if it doesn’t already exist. Here's how you should structure `init.py`:  
+
+---
+
+### **Updated `init.py` (with Database Initialization)**
+```python
+import sqlite3
+from flask import Flask, render_template, request, redirect, url_for, session, g
+
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+
+DATABASE = 'blog.db'
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+        db.row_factory = sqlite3.Row
+    return db
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
+def init_db():
+    """Creates tables if they do not exist"""
+    with sqlite3.connect(DATABASE) as conn:
+        cursor = conn.cursor()
+        
+        # Create Users Table
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE NOT NULL,
+                password TEXT NOT NULL
+            )
+        ''')
+
+        # Create Blogs Table
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS blogs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                title TEXT NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            )
+        ''')
+
+        # Create Entries Table
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS entries (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                blog_id INTEGER NOT NULL,
+                content TEXT NOT NULL,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (blog_id) REFERENCES blogs(id) ON DELETE CASCADE
+            )
+        ''')
+
+        conn.commit()
+    print("Database initialized successfully!")
+
+@app.before_first_request
+def initialize():
+    """Initialize the database before the first request"""
+    init_db()
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+---
+
+### **How This Works**
+1. **`init_db()` Function**  
+   - Creates the tables (`users`, `blogs`, and `entries`) if they **do not already exist**.
+   - Uses `ON DELETE CASCADE` so that when a user or blog is deleted, related entries are also removed.
+   - Uses `sqlite3.connect(DATABASE)` to execute the SQL commands.
+
+2. **`@app.before_first_request` Decorator**  
+   - Runs `init_db()` automatically when the Flask app starts.
+   - Ensures that the database is set up before handling requests.
+
+---
+
+### **How to Use**
+- Just **run your Flask app normally**:
+  ```
+  python init.py
+  ```
+- The database will be created if it doesn’t already exist.
+- If the database exists, it won’t overwrite it—only missing tables will be added.
+
+This should fix your "OperationalError: table not found" issue! 🚀 Let me know if you need more help.
+
+
+
