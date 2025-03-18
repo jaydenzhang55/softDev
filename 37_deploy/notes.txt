@@ -1,0 +1,10 @@
+- Restart Services (via spacebar)
+- What is python wheel?
+	- already installed?
+- uWSGI - software that communicates between NGINX and Python Flask
+- ufw?
+- unable to connect?
+- be sure not to make a typo: 500 is not equal to 5000
+- must auto update run.py
+- updating on desktop does not update droplet
+- can change file name for uWSGI file; must also change it in the commands. 
