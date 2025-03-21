@@ -1,0 +1,13 @@
+Team DAJJ :: Jayden Zhang, Daniel Park, Jackie Zeng, Aditya Anand
+SoftDev PD 5
+K37 - Accessing Flask on a Website
+2025-03-21
+time_spent: 1
+
+1. Read over the entire GitHub Assignment twice with the group. Enumerate anything unclear.
+2. Read the tutorial before acting on it.
+3. Follow the tutorial entirely and ensure every checkpoint is met.
+	- if any issues arise, team up and figure it out together.
+4. Afterwards, reread the tutorial for clear understanding of all commands.
+5. Try once again, but this time everyone else does it on their own machines.
+6. Set up Domain and HTTPS protection if time allots.
